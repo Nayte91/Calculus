@@ -8,11 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class APIController extends AbstractController
 {
-    #[Route(path:'/api', name: 'api')]
-    public function index(): Response
+    #[Route(path:'/computation', name: 'computation')]
+    public function compute(): Response
     {
         return $this->json([
-            'result' => 'Coucou',
+            'result' => '7',
         ]);
     }
 }
