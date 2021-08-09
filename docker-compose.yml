@@ -13,7 +13,7 @@ services:
     labels:
       - "traefik.http.routers.calculus.rule=Host(`calculus.anagraph.org`)"
     ports:
-      - 443:443
+      - "443:443"
 
   backend:
     build:
