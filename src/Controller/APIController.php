@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class APIController extends AbstractController
 {
-    #[Route(path:'/computation', name: 'computation')]
+    #[Route(path:'/computation', name: 'computation', methods: ['POST'])]
     public function compute(Calculator $calculator): Response
     {
         return $this->json([
