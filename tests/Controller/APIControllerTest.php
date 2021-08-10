@@ -10,12 +10,12 @@ class APIControllerTest extends WebTestCase
     /** @dataProvider getMethodResults */
     public function testComputationOnlyAcceptsPOSTRequests(string $method, bool $isAllowed): void
     {
+        $client = static::createClient();
         if (!$isAllowed) {
+            $client->catchExceptions(false);
             $this->expectException(MethodNotAllowedHttpException::class);
         }
 
-        $client = static::createClient();
-        $client->catchExceptions(false);
         $client->request($method, '/computation');
 
         if ($isAllowed) {
@@ -26,6 +26,7 @@ class APIControllerTest extends WebTestCase
     public function testResponseIsJSON(): void
     {
         $client = static::createClient();
+
         $client->request('POST', '/computation');
 
         $this->assertResponseHasHeader('Content-Type', 'application/json');

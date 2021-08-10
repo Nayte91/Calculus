@@ -4,9 +4,9 @@ namespace App\Service;
 
 class Calculator
 {
-    public $result = '7';
+    public int $result = 7;
 
-    public function getResult(): string
+    public function getResult(): int
     {
         return $this->result;
     }

@@ -13,7 +13,7 @@ class APIController extends AbstractController
     public function compute(Calculator $calculator): Response
     {
         return $this->json([
-            'result' => $calculator->getResult(),
+            'result' => $calculator->getResult()
         ]);
     }
 }

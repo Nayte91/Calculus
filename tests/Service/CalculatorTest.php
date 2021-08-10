@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Service;
 
 use App\Service\Calculator;
 use PHPUnit\Framework\TestCase;
@@ -9,8 +9,8 @@ class CalculatorTest extends TestCase
 {
     public function testSomething(): void
     {
-        $calulator = new Calculator();
+        $calculator = new Calculator();
 
-        $this->assertSame('7', $calulator->getResult());
+        $this->assertSame(7, $calculator->getResult());
     }
 }
