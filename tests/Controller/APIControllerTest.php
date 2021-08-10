@@ -27,7 +27,7 @@ class APIControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('POST', '/computation');
+        $client->request(method: 'POST', uri: '/computation', content: '{"entry": "4+3"}');
 
         $this->assertResponseHasHeader('Content-Type', 'application/json');
         $this->assertJson($client->getResponse()->getContent());
