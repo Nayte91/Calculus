@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CalculatorException;
 use App\Service\CalculatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,13 +14,14 @@ class APIController extends AbstractController
     #[Route(path:'/computation', name: 'computation', methods: ['POST'])]
     public function compute(CalculatorInterface $calculator, Request $request): Response
     {
-        $decoded = '';
-        if ($request->getContent()) {
-            $decoded = json_decode($request->getContent(), true)['entry'];
+        $decodedEntry = $request->getContent() ? json_decode($request->getContent(), true)['entry'] : '';
+
+        try {
+            $result = $calculator->compute($decodedEntry);
+        } catch (CalculatorException $exception) {
+            return $this->json(data:['error' => $exception->getMessage()], status: 400);
         }
 
-        return $this->json([
-            'result' => (string) $calculator->compute($decoded)
-        ]);
+        return $this->json(['result' => (string) $result]);
     }
 }
