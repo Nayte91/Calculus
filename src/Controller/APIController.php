@@ -14,7 +14,7 @@ class APIController extends AbstractController
     #[Route(path:'/computation', name: 'computation', methods: ['POST'])]
     public function compute(CalculatorInterface $calculator, Request $request): Response
     {
-        $decodedEntry = $request->getContent() ? json_decode($request->getContent(), true)['entry'] : '';
+        $decodedEntry = json_decode($request->getContent(), true)['entry'] ?? '';
 
         try {
             $result = $calculator->compute($decodedEntry);
