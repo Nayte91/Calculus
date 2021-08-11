@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class APIController extends AbstractController
 {
-    #[Route(path:'/computation', name: 'computation', methods: ['POST'])]
+    #[Route(path: '/computation', name: 'computation', methods: ['POST'])]
     public function compute(CalculatorInterface $calculator, Request $request): Response
     {
         $decodedEntry = json_decode($request->getContent(), true)['entry'] ?? '';
@@ -19,9 +19,12 @@ class APIController extends AbstractController
         try {
             $result = $calculator->compute($decodedEntry);
         } catch (CalculatorException $exception) {
-            return $this->json(data:['error' => $exception->getMessage()], status: 400);
+            return $this->json(data: ['error' => $exception->getMessage()], status: 400);
         }
 
-        return $this->json(['result' => (string) $result]);
+        return $this->json([
+            'entry' => $decodedEntry,
+            'result' => (string)$result,
+        ]);
     }
 }
