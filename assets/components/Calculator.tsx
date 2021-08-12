@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import CalculatorContext from "../types/CalculatorContext";
+import axios from "axios";
 
+import CalculatorContext from "../types/CalculatorContext";
 import OperatorButton from './OperatorButton';
 import DigitButton from './DigitButton';
 import ActionButton from './ActionButton';
@@ -52,6 +53,12 @@ const Calculator: React.FC = () => {
         }
         setCalculatorInput('');
     };
+
+    axios.post(`https://localhost:443/computation`, '{"entry": "4+3"}' )
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        })
 
     return (
         <CalculatorContext.Provider value={{ enterInput }}>
