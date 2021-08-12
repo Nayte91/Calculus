@@ -16,7 +16,7 @@ docker run --rm -it -v $PWD:/app -w /app node yarn install
 
 Reachable on https://127.0.0.1/
 
-##Few informations
+##Few information
 * React reach back's API on 127.0.0.1/computation
 * PHP8, SF5.3, React 17, Typescript, SASS
 

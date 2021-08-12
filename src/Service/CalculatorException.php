@@ -2,5 +2,4 @@
 
 namespace App\Service;
 
-class CalculatorException extends \Exception
-{}
+class CalculatorException extends \Exception { }

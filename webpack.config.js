@@ -14,16 +14,7 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
-    /*
-     * ENTRY CONFIG
-     *
-     * Each entry will result in one JavaScript file (e.g. app.ts)
-     * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
-     */
-    .addEntry('app', './assets/app.ts')
-
-    // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    .enableStimulusBridge('./assets/controllers.json')
+    .addEntry('app', './assets/app.tsx')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -54,25 +45,12 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
-
-    // enables Sass/SCSS support
     .enableSassLoader()
-
-    // uncomment if you use TypeScript
     .enableTypeScriptLoader()
-
-    // uncomment if you use React
     .enableReactPreset()
-
-    // uncomment to get integrity="..." attributes on your script & link tags
-    // requires WebpackEncoreBundle 1.4 or higher
     .enableIntegrityHashes(Encore.isProduction())
-
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-
     .copyFiles({
-        from: './assets/img',
+        from: './assets/images',
     })
 ;
 

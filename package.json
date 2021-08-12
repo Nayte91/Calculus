@@ -3,6 +3,8 @@
         "@babel/preset-react": "^7.0.0",
         "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/webpack-encore": "^1.0.0",
+        "@types/react": "^17.0.17",
+        "@types/react-dom": "^17.0.9",
         "core-js": "^3.0.0",
         "file-loader": "^6.0.0",
         "regenerator-runtime": "^0.13.2",
