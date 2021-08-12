@@ -4,6 +4,16 @@ export const Actions: Action[] = [
     {
         symbol: '=',
         keyCode: '13',
-        perform: 'computation'
+        perform: 'compute'
+    },
+    {
+        symbol: 'C',
+        keyCode: '8',
+        perform: 'clear'
+    },
+    {
+        symbol: 'AC',
+        keyCode: '27',
+        perform: 'allClear'
     }
 ]
