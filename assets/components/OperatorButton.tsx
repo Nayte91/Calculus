@@ -11,11 +11,9 @@ const OperatorButton: React.FC<Props> = ({
     perform
 }) => {
     return (
-        <div className={`button__${operator.symbol}`}>
-            <button onClick={() => perform(operator.symbol)}>
-                { operator.symbol }
-            </button>
-        </div>
+        <button onClick={() => perform(operator.symbol)} className={`button__${operator.slug}`}>
+            { operator.symbol }
+        </button>
     );
 };
 

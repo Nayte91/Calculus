@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React, { SetStateAction, useState } from 'react';
+import axios, { AxiosResponse } from "axios";
 
 import CalculatorContext from "../types/CalculatorContext";
 import OperatorButton from './OperatorButton';
@@ -29,13 +29,14 @@ const Calculator: React.FC = () => {
     const compute = (): void => {
         addToQueue();
 
-        try {
-            const solvedVal = eval(calculatorInput.replace(/×/g, '*'));
-            setCalculatorInput(solvedVal);
-        } catch (err) {
-            setCalculatorInput(errorMsg);
-            setClearNext(true);
-        }
+        const resultat = axios
+            .post(`https://localhost:443/computation`, '{"entry": "' + calculatorInput + '"}')
+            .then((result: AxiosResponse) => {
+                setCalculatorInput(result.data.result);
+            });
+        
+        /* const solvedVal = eval(calculatorInput.replace(/×/g, '*'));
+        const solvedVal = request(calculatorInput) */
     };
 
     const enterInput = (newInput: string): void => {
@@ -54,35 +55,22 @@ const Calculator: React.FC = () => {
         setCalculatorInput('');
     };
 
-    axios.post(`https://localhost:443/computation`, '{"entry": "4+3"}' )
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-
     return (
         <CalculatorContext.Provider value={{ enterInput }}>
             <section className='calculator'>
-                <input
-                    className='calculator__display'
-                    type='text'
-                    readOnly
-                    value={calculatorInput}
-                />
+                <div className='calculator__display'>
+                    <div className="display__history"><span className='display__text'>{calculatorInput}</span></div>
+                    <div className="display__current">
+                        <span className='display__text'>{calculatorInput}</span>
+                    </div>
+                </div>
                 <div className='calculator__pad'>
-                    <div className='calculator__pad__digits'>
-                        { Digits.map(Digit => { return <DigitButton digit={Digit} perform={enterInput} /> })}
-                    </div>
-                    <div className='calculator__pad__operations'>
-                        { Operators.map(Operator => { return <OperatorButton operator={Operator} perform={enterInput} /> })}
-                    </div>
-                    <div className='calculator__pad__actions'>
-                        <ActionButton symbol='C' action={revertToPreviousState} />
-                        <ActionButton symbol='AC' action={clearInput} />
-                        <ActionButton symbol='=' action={compute} />
-                    
-                        {/* { Actions.map(Action => { return <ActionButton action={Action} perform={compute} /> })}  */}
-                    </div>
+                    { Digits.map(Digit => { return <DigitButton digit={Digit} perform={enterInput} /> })}
+                    { Operators.map(Operator => { return <OperatorButton operator={Operator} perform={enterInput} /> })}
+                    <ActionButton symbol='C' slug='clear' action={revertToPreviousState} />
+                    <ActionButton symbol='AC' slug='reset' action={clearInput} />
+                    <ActionButton symbol='=' slug='equal' action={compute} />
+                    {/* { Actions.map(Action => { return <ActionButton action={Action} perform={compute} /> })}  */}
                 </div>
             </section>
         </CalculatorContext.Provider>

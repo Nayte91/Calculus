@@ -1,3 +1,67 @@
-.button {
-  background-color: cadetblue;
+button {
+  background-color: rgb(241, 243, 244);
+  border: none;
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.button__one { grid-area: one }
+
+.button__two { grid-area: two }
+
+.button__three { grid-area: three }
+
+.button__four { grid-area: four }
+
+.button__five { grid-area: five }
+
+.button__six { grid-area: six }
+
+.button__seven { grid-area: seven }
+
+.button__eight { grid-area: eight }
+
+.button__nine { grid-area: nine }
+
+.button__zero { grid-area: zero }
+
+.button__dot { grid-area: dot }
+
+.button__plus {
+  grid-area: plus;
+  background-color: #dadce0;
+  font-size: 18px;
+}
+
+.button__minus {
+  grid-area: minus;
+  background-color: #dadce0;
+  font-size: 18px;
+}
+
+.button__divide { 
+  grid-area: divide;
+  background-color: #dadce0;
+  font-size: 18px;
+}
+
+.button__multiply { 
+  grid-area: multiply;
+  background-color: #dadce0;
+  font-size: 18px;
+}
+
+.button__clear { grid-area: clear }
+
+.button__reset { grid-area: reset }
+
+.button__equal { 
+  grid-area: equal;
+  background-color: #4285f4;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
 }

@@ -11,11 +11,9 @@ const DigitButton: React.FC<Props> = ({
     perform
 }) => {
     return (
-        <div className={`button__${digit.symbol}`}>
-            <button onClick={() => perform(digit.symbol)} >
-                { digit.symbol }
-            </button>
-        </div>
+        <button onClick={() => perform(digit.symbol)} className={`button__${digit.slug}`}>
+            { digit.symbol }
+        </button>
     );
 };
 
