@@ -1,8 +1,8 @@
-type Action = {
+type Key = {
     symbol: string,
     slug: string,
     keyCode: string,
-    perform: string
+    perform?: string
 }
 
-export default Action
+export default Key
