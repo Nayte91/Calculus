@@ -11,7 +11,7 @@ class CalculatorTest extends TestCase
     /** @dataProvider getWorkingCases */
     public function testCompute(float $expected, string $entry): void
     {
-        $calculator = new Calculator();
+        $calculator = new Calculator;
 
         $this->assertEquals($expected, $calculator->compute($entry));
     }
@@ -21,7 +21,7 @@ class CalculatorTest extends TestCase
     {
         $this->expectException(CalculatorException::class);
 
-        $calculator = new Calculator();
+        $calculator = new Calculator;
         $calculator->compute($badEntry);
     }
 

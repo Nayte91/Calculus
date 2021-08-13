@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/', 'home')]
     public function home(): Response
     {
         return $this->render('home.html.twig');
     }
 
-    #[Route(path: '/computation', name: 'computation', methods: ['POST'])]
+    #[Route('/computation', 'computation', methods: ['POST'])]
     public function compute(CalculatorInterface $calculator, Request $request): Response
     {
         $decodedEntry = json_decode($request->getContent(), true)['entry'] ?? '';
@@ -25,7 +25,7 @@ class MainController extends AbstractController
         try {
             $result = $calculator->compute($decodedEntry);
         } catch (CalculatorException $exception) {
-            return $this->json(data: ['error' => $exception->getMessage()], status: 400);
+            return $this->json(['error' => $exception->getMessage()], status: 400);
         }
 
         return $this->json([
