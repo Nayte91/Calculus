@@ -1,6 +1,6 @@
-import { Digit } from "../types/Digit";
+import Digit from "../types/Digit";
 
-export const Digits: Digit[] = [
+const digits: Digit[] = [
     {
         symbol: '0',
         slug: 'zero',
@@ -57,3 +57,5 @@ export const Digits: Digit[] = [
         keyCode: '81'
     }
 ]
+
+export default digits

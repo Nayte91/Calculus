@@ -1,5 +1,5 @@
 import React from 'react';
-import { Operator } from '../types/Operator';
+import Operator from '../types/Operator';
 
 interface Props {
     operator: Operator;

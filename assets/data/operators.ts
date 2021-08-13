@@ -1,6 +1,6 @@
-import { Operator } from "../types/Operator";
+import Operator from "../types/Operator";
 
-export const Operators: Operator[] = [
+const operators: Operator[] = [
     {
         symbol: '+',
         slug: 'plus',
@@ -22,3 +22,5 @@ export const Operators: Operator[] = [
         keyCode: '111'
     }
 ]
+
+export default operators

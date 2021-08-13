@@ -1,6 +1,6 @@
-import { Action } from "../types/Action";
+import Action from "../types/Action";
 
-export const Actions: Action[] = [
+const actions: Action[] = [
     {
         symbol: '=',
         slug: "equal",
@@ -20,3 +20,5 @@ export const Actions: Action[] = [
         perform: 'allClear'
     }
 ]
+
+export default actions

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Digit } from '../types/Digit';
+import Digit from '../types/Digit';
 
 interface Props {
     digit: Digit;

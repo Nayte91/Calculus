@@ -1,5 +1,5 @@
 import React from 'react';
-import { Action } from '../types/Action';
+import Action from '../types/Action';
 import '../styles/components/Button.scss';
 
 interface Props {

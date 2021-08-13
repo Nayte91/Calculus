@@ -1,5 +1,7 @@
-export type Digit = {
+type Digit = {
     symbol: string,
     slug: string,
     keyCode: string
 }
+
+export default Digit
