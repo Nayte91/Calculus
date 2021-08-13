@@ -20,7 +20,6 @@ class Calculator implements CalculatorInterface
 
     private function validateString(string $suspicious): void
     {
-        if (preg_match(pattern: '/[^0-9+\-*\/.]/', subject: $suspicious))
-            throw new ParseError('Only characters allowed are / * + - numbers and .');
+        if (preg_match(pattern: '/[^0-9+\-*\/.]/', subject: $suspicious)) throw new ParseError('Only characters allowed are / * + - numbers and .');
     }
 }

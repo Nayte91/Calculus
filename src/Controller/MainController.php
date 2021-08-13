@@ -9,8 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class APIController extends AbstractController
+class MainController extends AbstractController
 {
+    #[Route('/', name: 'home')]
+    public function home(): Response
+    {
+        return $this->render('home.html.twig');
+    }
+
     #[Route(path: '/computation', name: 'computation', methods: ['POST'])]
     public function compute(CalculatorInterface $calculator, Request $request): Response
     {

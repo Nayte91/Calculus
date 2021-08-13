@@ -7,21 +7,14 @@ import digits from '../data/digits';
 import computation from '../data/computation';
 
 const Calculator: React.FC = () => {
-    const errorMsg: string = 'ERROR';
     const [calculatorInput, setCalculatorInput] = useState<string>('');
     const [stateQueue, setStateQueue] = useState<string[]>([]);
     const [clearNext, setClearNext] = useState<boolean>(false);
 
-    const addToQueue = (state: string = calculatorInput): void => {
-        (state !== errorMsg) && setStateQueue([...stateQueue, state]);
-    };
-
-    const revertToPreviousState = (): void => {
-        setCalculatorInput(stateQueue.pop() || '');
-    };
+    const revertToPreviousState = (): void => setCalculatorInput(stateQueue.pop() || '');
 
     const compute = async (): Promise<void> => {
-        addToQueue();
+        QueueInput();
         
         const result: string = await computation(calculatorInput);
 
@@ -29,7 +22,7 @@ const Calculator: React.FC = () => {
     };
 
     const enterInput = (newInput: string): void => {
-        clearNext && addToQueue();
+        clearNext && QueueInput();
 
         const prefix: string = clearNext ? '' : calculatorInput;
 
@@ -37,12 +30,13 @@ const Calculator: React.FC = () => {
         setClearNext(false);
     };
 
-    const clearInput = (saveState: boolean = true): void => {
-        clearNext && addToQueue();
+    const QueueInput = (state: string = calculatorInput): void => setStateQueue([...stateQueue, state]);
 
+    const clearInput = (): void => {
+        clearNext && QueueInput();
         setCalculatorInput('');
     };
-
+    
     return (
         <CalculatorContext.Provider value={{ enterInput }}>
             <section className='calculator'>
@@ -53,7 +47,7 @@ const Calculator: React.FC = () => {
                     </div>
                 </div>
                 <div className='calculator__pad'>
-                    { digits.map( digit => <DigitButton key={ digit.symbol } digit={ digit } perform={ enterInput } /> ) }
+                    { digits.map(digit => <DigitButton key={ digit.symbol } digit={ digit } perform={ enterInput } />) }
                     <ActionButton symbol='C' slug='clear' action={ revertToPreviousState } />
                     <ActionButton symbol='AC' slug='reset' action={ clearInput } />
                     <ActionButton symbol='=' slug='equal' action={ compute } />
