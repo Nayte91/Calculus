@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import CalculatorContext from "../types/CalculatorContext";
-import OperatorButton from './OperatorButton';
 import DigitButton from './DigitButton';
 import ActionButton from './ActionButton';
 import './../styles/components/Calculator.scss';
 import digits from '../data/digits';
-import operators from '../data/operators';
 import computation from '../data/computation';
 
 const Calculator: React.FC = () => {
@@ -31,7 +29,6 @@ const Calculator: React.FC = () => {
 
         setCalculatorInput(result);
     };
-        
 
     const enterInput = (newInput: string): void => {
         if (clearNext) {
@@ -59,8 +56,7 @@ const Calculator: React.FC = () => {
                     </div>
                 </div>
                 <div className='calculator__pad'>
-                    { digits.map(Digit => { return <DigitButton digit={Digit} perform={enterInput} /> })}
-                    { operators.map(Operator => { return <OperatorButton operator={Operator} perform={enterInput} /> })}
+                    { digits.map(Digit => { return <DigitButton key={Digit.symbol} digit={Digit} perform={enterInput} /> })}
                     <ActionButton symbol='C' slug='clear' action={revertToPreviousState} />
                     <ActionButton symbol='AC' slug='reset' action={clearInput} />
                     <ActionButton symbol='=' slug='equal' action={compute} />
