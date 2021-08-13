@@ -13,9 +13,7 @@ const Calculator: React.FC = () => {
     const [clearNext, setClearNext] = useState<boolean>(false);
 
     const addToQueue = (state: string = calculatorInput): void => {
-        if (state !== errorMsg) {
-            setStateQueue([...stateQueue, state]);
-        }
+        (state !== errorMsg) && setStateQueue([...stateQueue, state]);
     };
 
     const revertToPreviousState = (): void => {
@@ -25,24 +23,23 @@ const Calculator: React.FC = () => {
     const compute = async (): Promise<void> => {
         addToQueue();
         
-        const result = await computation(calculatorInput);
+        const result: string = await computation(calculatorInput);
 
         setCalculatorInput(result);
     };
 
     const enterInput = (newInput: string): void => {
-        if (clearNext) {
-            addToQueue();
-        }
+        clearNext && addToQueue();
+
         const prefix: string = clearNext ? '' : calculatorInput;
+
         setCalculatorInput(`${prefix}${newInput}`);
         setClearNext(false);
     };
 
     const clearInput = (saveState: boolean = true): void => {
-        if (saveState) {
-            addToQueue();
-        }
+        clearNext && addToQueue();
+
         setCalculatorInput('');
     };
 
@@ -50,16 +47,16 @@ const Calculator: React.FC = () => {
         <CalculatorContext.Provider value={{ enterInput }}>
             <section className='calculator'>
                 <div className='calculator__display'>
-                    <div className="display__history"><span className='display__text'>{stateQueue}</span></div>
+                    <div className="display__history"><span className='display__text'>{ stateQueue }</span></div>
                     <div className="display__current">
-                        <span className='display__text'>{calculatorInput}</span>
+                        <span className='display__text'>{ calculatorInput }</span>
                     </div>
                 </div>
                 <div className='calculator__pad'>
-                    { digits.map(Digit => { return <DigitButton key={Digit.symbol} digit={Digit} perform={enterInput} /> })}
-                    <ActionButton symbol='C' slug='clear' action={revertToPreviousState} />
-                    <ActionButton symbol='AC' slug='reset' action={clearInput} />
-                    <ActionButton symbol='=' slug='equal' action={compute} />
+                    { digits.map( digit => <DigitButton key={ digit.symbol } digit={ digit } perform={ enterInput } /> ) }
+                    <ActionButton symbol='C' slug='clear' action={ revertToPreviousState } />
+                    <ActionButton symbol='AC' slug='reset' action={ clearInput } />
+                    <ActionButton symbol='=' slug='equal' action={ compute } />
                     {/* { Actions.map(Action => { return <ActionButton action={Action} perform={compute} /> })}  */}
                 </div>
             </section>
