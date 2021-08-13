@@ -12,14 +12,14 @@ class Calculator implements CalculatorInterface
             $this->validateString($entry);
             $calculated = eval("return " . $entry . ";");
         } catch (ParseError $exception) {
-            throw new CalculatorException(message: 'are you kidding ? Please use proper front to avoid syntax errors.', previous: $exception);
+            throw new CalculatorException('are you kidding ? Please use proper front to avoid syntax errors.', previous: $exception);
         }
 
-        return round(num: $calculated, precision: 8);
+        return round($calculated, precision: 8);
     }
 
     private function validateString(string $suspicious): void
     {
-        if (preg_match(pattern: '/[^0-9+\-*\/.]/', subject: $suspicious)) throw new ParseError('Only characters allowed are / * + - numbers and .');
+        if (preg_match('/[^0-9+\-*\/.]/', $suspicious)) throw new ParseError('Only characters allowed are / * + - numbers and .');
     }
 }
