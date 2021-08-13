@@ -30,7 +30,7 @@ const Calculator: React.FC = () => {
         addToQueue();
 
         const resultat = axios
-            .post(`https://localhost:443/computation`, '{"entry": "' + calculatorInput + '"}')
+            .post(`/computation`, '{"entry": "' + calculatorInput + '"}')
             .then((result: AxiosResponse) => {
                 setCalculatorInput(result.data.result);
             });
