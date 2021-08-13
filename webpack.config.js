@@ -7,14 +7,14 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
-    // directory where compiled assets will be stored
+    // directory where compiled front will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
-    .addEntry('app', './assets/app.tsx')
+    .addEntry('app', './front/app.tsx')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -50,7 +50,7 @@ Encore
     .enableReactPreset()
     .enableIntegrityHashes(Encore.isProduction())
     .copyFiles({
-        from: './assets/images',
+        from: './front/images',
     })
 ;
 

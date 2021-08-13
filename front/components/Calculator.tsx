@@ -38,7 +38,9 @@ const Calculator: React.FC = () => {
     return (
         <section className='calculator'>
             <div className='calculator__display'>
-                <div className="display__history"><span className='display__text'>{ stateQueue }</span></div>
+                <div className="display__history">
+                    <span className='display__text'>{ stateQueue }</span>
+                </div>
                 <div className="display__current">
                     <span className='display__text'>{ calculatorInput }</span>
                 </div>

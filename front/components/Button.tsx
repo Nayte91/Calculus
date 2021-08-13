@@ -7,9 +7,10 @@ interface Props {
     perform: (symbol?: string) => void;
 }
 
-const Button: React.FC<Props> = ({
-    digit,
-    perform
-}) => <button onClick={ () => perform(digit.symbol) } className={ `button__${digit.slug}` }>{ digit.symbol }</button>;
+const Button: React.FC<Props> = ({ digit, perform }) => (
+    <button onClick={ () => perform(digit.symbol) } className={ `button__${digit.slug}` }>
+        { digit.symbol }
+    </button>
+);
 
 export default Button;
