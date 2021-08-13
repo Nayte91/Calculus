@@ -1,0 +1,41 @@
+.calculator {
+  font-family: Arial, sans-serif;
+  width: 370px;
+
+  .calculator__display {
+    width: 98.5%;
+    height: 70px;
+    margin-bottom: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    
+    .display__history {
+      margin: 8px 0 5px 0;
+      height: 20px;
+      font-size: 18px;
+    }
+
+    .display__current {
+      height: 32px;
+      font-size: 30px;
+    }
+
+    .display__text {
+      float: right;
+    }
+  }
+
+  .calculator__pad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 35px);
+    gap: 7px;
+    grid-template-areas: 
+      "reset clear divide multiply"
+      "seven eight nine minus"
+      "four five six plus"
+      "one two three equal"
+      "zero zero dot equal"
+    ;
+  }
+}

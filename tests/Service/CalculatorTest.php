@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalculatorTest extends TestCase
 {
-    /** @dataProvider getProperCases */
+    /** @dataProvider getWorkingCases */
     public function testCompute(float $expected, string $entry): void
     {
         $calculator = new Calculator();
@@ -25,7 +25,7 @@ class CalculatorTest extends TestCase
         $calculator->compute($badEntry);
     }
 
-    public function getProperCases(): array
+    public function getWorkingCases(): array
     {
         return [
             [7, "4+3"],
