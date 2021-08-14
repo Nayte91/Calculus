@@ -7,7 +7,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ digit, perform }) => (
-    <button onClick={ () => perform(digit.symbol) } className={ `button__${digit.slug}` }>
+    <button onClick={ () => perform(digit.symbol) } className={ `button__${digit.slug} button__${digit.type}` }>
         { digit.symbol }
     </button>
 );
