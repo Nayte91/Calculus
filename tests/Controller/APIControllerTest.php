@@ -18,9 +18,7 @@ class APIControllerTest extends WebTestCase
 
         $client->request($method, '/computation');
 
-        if ($shouldBeAllowed) {
-            $this->assertResponseIsSuccessful();
-        }
+        $shouldBeAllowed && $this->assertResponseIsSuccessful();
     }
 
     public function testResponseIsJSON(): void
