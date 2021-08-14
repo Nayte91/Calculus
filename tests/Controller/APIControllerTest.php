@@ -8,17 +8,17 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 class APIControllerTest extends WebTestCase
 {
     /** @dataProvider getMethodResults */
-    public function testComputationOnlyAcceptsPOSTRequests(string $method, bool $isAllowed): void
+    public function testComputationOnlyAcceptsPOSTRequests(string $method, bool $shouldBeAllowed): void
     {
         $client = static::createClient();
-        if (!$isAllowed) {
+        if (!$shouldBeAllowed) {
             $client->catchExceptions(false);
             $this->expectException(MethodNotAllowedHttpException::class);
         }
 
         $client->request($method, '/computation');
 
-        if ($isAllowed) {
+        if ($shouldBeAllowed) {
             $this->assertResponseIsSuccessful();
         }
     }
