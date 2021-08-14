@@ -1,7 +1,7 @@
 type Key = {
     symbol: string,
     slug: string,
-    keyCode: string,
+    keyCode: number,
     perform?: string,
     type: string
 }

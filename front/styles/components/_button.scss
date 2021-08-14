@@ -5,21 +5,10 @@ button {
   width: 100%;
   cursor: pointer;
   font-size: 14px;
+  transition: all .07s ease;
 }
 
-.button__digit { background-color: $google-lightgray; }
-
-.button__operator { 
-  background-color: $google-darkgray;
-  font-size: 18px;
-}
-
-.button__executor { 
-  background-color: $google-blue;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-}
+.active { transform: scale(1.1) }
 
 .button__one { grid-area: one }
 
@@ -56,3 +45,17 @@ button {
 .button__reset { grid-area: reset }
 
 .button__equal { grid-area: equal }
+
+.button__digit { background-color: $google-lightgray; }
+
+.button__operator { 
+  background-color: $google-darkgray;
+  font-size: 18px;
+}
+
+.button__executor { 
+  background-color: $google-blue;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
