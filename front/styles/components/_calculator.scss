@@ -1,13 +1,13 @@
 .calculator {
   font-family: Arial, sans-serif;
-  width: 370px;
+  width: 95%;
 
   .calculator__pad {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 35px);
     gap: 7px;
-    grid-template-areas: 
+    grid-template-areas:
       "reset clear divide multiply"
       "seven eight nine minus"
       "four five six plus"

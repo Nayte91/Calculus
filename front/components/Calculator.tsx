@@ -3,7 +3,6 @@ import Screen from './Screen';
 import Button from './Button';
 import keys from '../data/keys';
 import computation from '../data/computation';
-import './../styles/components/Calculator.scss';
 
 const Calculator: React.FC = () => {
     const [calculatorInput, setCalculatorInput] = useState<string>('');

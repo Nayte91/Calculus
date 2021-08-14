@@ -1,0 +1,13 @@
+$google-blue: #4285f4;
+$google-darkgray: #dadce0;
+$google-lightgray: #f1f3f4;
+
+body {
+    background-color: white;
+    display: grid;
+    justify-content: center;
+    
+    main {
+        width: 375px;
+    }
+}
