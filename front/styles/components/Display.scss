@@ -1,0 +1,22 @@
+.calculator__display {
+    width: 98.5%;
+    height: 70px;
+    margin-bottom: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    
+    .display__history {
+      margin: 8px 0 5px 0;
+      height: 20px;
+      font-size: 18px;
+    }
+
+    .display__current {
+      height: 32px;
+      font-size: 30px;
+    }
+
+    .display__text {
+      float: right;
+    }
+  }
