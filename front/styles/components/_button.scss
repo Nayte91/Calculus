@@ -1,5 +1,5 @@
 button {
-  background-color: rgb(241, 243, 244);
+  background-color: $google-lightgray;
   border: none;
   border-radius: 4px;
   height: 100%;
@@ -32,25 +32,25 @@ button {
 
 .button__plus {
   grid-area: plus;
-  background-color: #dadce0;
+  background-color: $google-darkgray;
   font-size: 18px;
 }
 
 .button__minus {
   grid-area: minus;
-  background-color: #dadce0;
+  background-color: $google-darkgray;
   font-size: 18px;
 }
 
 .button__divide { 
   grid-area: divide;
-  background-color: #dadce0;
+  background-color: $google-darkgray;
   font-size: 18px;
 }
 
 .button__multiply { 
   grid-area: multiply;
-  background-color: #dadce0;
+  background-color: $google-darkgray;
   font-size: 18px;
 }
 
@@ -60,7 +60,7 @@ button {
 
 .button__equal { 
   grid-area: equal;
-  background-color: #4285f4;
+  background-color: $google-blue;
   color: white;
   font-weight: bold;
   font-size: 18px;

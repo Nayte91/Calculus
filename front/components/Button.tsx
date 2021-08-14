@@ -1,6 +1,5 @@
 import React from 'react';
 import Digit from '../types/Key';
-import '../styles/components/Button.scss';
 
 interface ButtonProps {
     digit: Digit;

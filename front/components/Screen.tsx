@@ -1,7 +1,5 @@
 import React from "react";
 
-import '../styles/components/Screen.scss';
-
 interface ScreenProps {
     history: string[];
     current: string;
