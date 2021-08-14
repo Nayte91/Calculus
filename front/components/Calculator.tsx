@@ -3,6 +3,7 @@ import Button from './Button';
 import keys from '../data/keys';
 import computation from '../data/computation';
 import './../styles/components/Calculator.scss';
+import Display from './Display';
 
 const Calculator: React.FC = () => {
     const [calculatorInput, setCalculatorInput] = useState<string>('');
@@ -37,14 +38,7 @@ const Calculator: React.FC = () => {
     
     return (
         <section className='calculator'>
-            <div className='calculator__display'>
-                <div className="display__history">
-                    <span className='display__text'>{ stateQueue }</span>
-                </div>
-                <div className="display__current">
-                    <span className='display__text'>{ calculatorInput }</span>
-                </div>
-            </div>
+            <Display history={ stateQueue } current={ calculatorInput } />
             <div className='calculator__pad'>
                 { keys.map(key => <Button key={ key.symbol } digit={ key } perform={ key.perform ? eval(key.perform) : enterInput } />) }
             </div>
