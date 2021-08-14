@@ -1,15 +1,28 @@
-import React from 'react';
-import Digit from '../types/Key';
+import React, { useState, useEffect } from 'react';
+import Key from '../types/Key';
 
 interface ButtonProps {
-    digit: Digit;
+    calcKey: Key;
     perform: (symbol?: string) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ digit, perform }) => (
-    <button onClick={ () => perform(digit.symbol) } className={ `button__${digit.slug} button__${digit.type}` }>
-        { digit.symbol }
-    </button>
-);
+const Button: React.FC<ButtonProps> = ({ calcKey, perform }) => {
+    const [active, setActive] = useState<boolean>(false);
+
+    const handleClick = (pressing: boolean = false): void => {
+        !pressing && perform(calcKey.symbol);
+        setActive(pressing);
+    }
+
+    return (
+        <button 
+            onMouseDown={ () => handleClick(true) }
+            onMouseUp={ () => handleClick(false) } 
+            className={ `button__${calcKey.slug} button__${calcKey.type}${active ? " active" : ""}` }
+        >
+            { calcKey.symbol }
+        </button>
+    );
+}
 
 export default Button;

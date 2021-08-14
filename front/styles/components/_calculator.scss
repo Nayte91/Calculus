@@ -8,9 +8,9 @@
     grid-template-rows: repeat(5, 35px);
     gap: 7px;
     grid-template-areas:
-      "reset clear divide multiply"
-      "seven eight nine minus"
-      "four five six plus"
+      "plus minus multiply divide"
+      "seven eight nine reset"
+      "four five six clear"
       "one two three equal"
       "zero zero dot equal"
     ;
