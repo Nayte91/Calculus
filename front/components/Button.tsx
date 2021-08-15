@@ -10,7 +10,7 @@ const Button: React.FC<ButtonProps> = ({ calcKey, perform }) => {
     const [active, setActive] = useState<boolean>(false);
 
     const handleClick = (pressing: boolean = false): void => {
-        !pressing && perform(calcKey.symbol);
+        pressing || perform(calcKey.symbol);
         setActive(pressing);
     }
 
