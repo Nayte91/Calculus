@@ -37,7 +37,7 @@ const Calculator: React.FC = () => {
     
     return (
         <section className='calculator'>
-            <Screen history={ stateQueue } current={ calculatorInput } />
+            <Screen history={ stateQueue[stateQueue.length - 1] } current={ calculatorInput } />
             <div className='calculator__pad'>
                 { keys.map(key => <Button key={ key.symbol } calcKey={ key } perform={ key.perform ? eval(key.perform) : enterInput } />) }
             </div>
