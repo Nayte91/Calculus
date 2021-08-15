@@ -3,24 +3,26 @@
 ##How to install
 1. Start the containers.
 ```bash
-docker-compose up --build -d
+docker compose up --build -d
 ```
-2. Want to launch tests ?
+2. install dependencies & build
 ```bash
-docker-compose exec backend ./vendor/bin/simple-phpunit
+composer install && yarn install --frozen-lockfile && yarn build
 ```
-3. React part WIP
+3. Want to launch tests ?
 ```bash
-docker run --rm -it -v $PWD:/app -w /app node yarn install
+docker compose exec backend ./vendor/bin/simple-phpunit
 ```
 
-Reachable on https://127.0.0.1/ and back's API on /computation URI (with postman i.e.).
+Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman i.e.).
 
 ##What will you find in this project ?
-* PHP8, SF5.3, PHPUnit 9, React 17, Typescript, SASS
-* symfony's src folder renamed as back
-* encore's assets folder renamed as front
-* docker's resources can be found in system folder
+
+* PHP8, SF5.3, PHPUnit 9, React 17, TypeScript 4.3, SASS
+* Symfony's src/ renamed as back/
+* Webpack Encore's assets/ renamed as front/
+* Docker's resources can be found in system/
+*
 * Controllers are annotated with PHP8's attributes
 * PHP8's named parameters when parameter's position should be bypassed
 * Tests use data providers

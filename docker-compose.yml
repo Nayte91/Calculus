@@ -18,7 +18,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: system/backend/Dockerfile
+      dockerfile: system/Dockerfile
       args:
         PHP_VERSION: 8
         COMPOSER_VERSION: 2
