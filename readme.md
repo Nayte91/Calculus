@@ -12,7 +12,7 @@ composer install && yarn install --frozen-lockfile && yarn build
 ```
 3. Want to launch tests ?
 ```bash
-docker compose exec backend ./vendor/bin/simple-phpunit
+docker compose exec backend php bin/phpunit
 ```
 
 Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman i.e.).
@@ -39,13 +39,22 @@ Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman
 ### On the Front department
 
 * Front makes use of smart component with Calculator, and dumb one with Button 
+* Design inspired by [Google's calculator](https://www.google.com/search?client=firefox-b-d&q=calculator)
+* All variables, functions, arrays and objects are TypeScript's typed
+* Axios' fetch async method is abstracted in data/computation.ts
+* CSS classes compliant with BEM methodology
+* Use of CSS grid system for buttons
+* Use CSS transition and animation for button pressing
+* Use of SASS variables and nested properties
 * Use of Short-circuit evaluation and ternary operators on TS side
 * Use of async / await, useState hook, map on TS side
 * Use of Functional components instead of classes for improved performances
-* All variables, functions, arrays and objects are TypeScript's typed
-* Axios' fetch async method is abstracted in data/computation.ts
-* SASS stylesheets in styles, compliant with BEM methodology
-* CSS grid system used for buttons
-* Design inspired by [Google's calculator](https://www.google.com/search?client=firefox-b-d&q=calculator)
+* Use of double destructuration, in data/computation.ts
+* Use of useEffect hook
+
+### On the versionning department
+
+* Each change has an issue, a branch, commits, a PR
+* Modified Github's labels in order for better qualification
 
 Julien "Nayte" Robic.

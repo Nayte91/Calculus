@@ -5,7 +5,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
-class APIControllerTest extends WebTestCase
+class MainControllerTest extends WebTestCase
 {
     /** @dataProvider getMethodResults */
     public function testComputationOnlyAcceptsPOSTRequests(string $method, bool $shouldBeAllowed): void
