@@ -41,9 +41,9 @@ const Calculator: React.FC = () => {
     };
     
     return (
-        <section className='calculator'>
+        <section className='calculator' aria-label='calculator'>
             <Screen history={ stateQueue[stateQueue.length - 1] } current={ calculatorInput } />
-            <div className='calculator__pad'>
+            <div className='calculator__pad' aria-label='calculator pad'>
                 { keys.map(key => <Button key={ key.symbol } calcKey={ key } perform={ key.perform ? eval(key.perform) : enterInput } />) }
             </div>
         </section>
