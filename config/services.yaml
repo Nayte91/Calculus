@@ -11,15 +11,15 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in back/ available to be used as services
+    # makes classes in src-back/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../back/'
+        resource: '../src-back/'
         exclude:
             - '..//DependencyInjection/'
-            - '../back/Entity/'
-            - '../back/Kernel.php'
-            - '../back/Tests/'
+            - '../src-back/Entity/'
+            - '../src-back/Kernel.php'
+            - '../tests/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
