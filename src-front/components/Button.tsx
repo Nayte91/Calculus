@@ -19,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({ calcKey, perform }) => {
             onMouseDown={ () => handleClick(true) }
             onMouseUp={ () => handleClick(false) } 
             className={ `button__${calcKey.slug} button__${calcKey.type}${active ? " active" : ""}` }
+            aria-label={ `press ${calcKey.slug}` }
         >
             { calcKey.symbol }
         </button>
