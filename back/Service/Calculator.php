@@ -15,7 +15,10 @@ class Calculator implements CalculatorInterface
         try {
             $this->validateString($entry);
         } catch (ParseError $exception) {
-            throw new CalculatorException('are you kidding ? Please use proper front to avoid syntax errors.', previous: $exception);
+            throw new CalculatorException(
+                          'are you kidding ? Please use proper front to avoid syntax errors.',
+                previous: $exception
+            );
         }
 
         return round($this->calculate($entry), precision: 8);
@@ -27,37 +30,42 @@ class Calculator implements CalculatorInterface
             preg_match('/[^0-9+\-*\/.]/', $suspicious)
             || preg_match('/[\-]{3,}/', $suspicious)
             || preg_match('/([.+*\/])\1/', $suspicious)
-        )
+        ) {
             throw new ParseError('Only characters allowed are / * + - numbers and .');
+        }
     }
 
-    private function explodeOperandsAndOperators(string $entry): array {
-            $operands = preg_split(self::PREG_LIST, $entry, flags: PREG_SPLIT_OFFSET_CAPTURE);
+    private function explodeOperandsAndOperators(string $entry): array
+    {
+        $operands = preg_split(self::PREG_LIST, $entry, flags: PREG_SPLIT_OFFSET_CAPTURE);
 
-            foreach ($operands as &$operand) {
-                $position = $operand[1];
+        foreach ($operands as &$operand) {
+            $position = $operand[1];
 
-                if ($position < 1) continue;
-
-                $operator = $entry[$position -1];
-                $operand[1] = $operator;
+            if ($position < 1) {
+                continue;
             }
+
+            $operator = $entry[$position - 1];
+            $operand[1] = $operator;
+        }
 
         return $operands;
     }
 
     /** takes the parsed array, and gives back the same array but smashed once. */
-    private function smashRecursively(array $entries, array $operators): array {
+    private function smashRecursively(array $entries, array $operators): array
+    {
         foreach ($entries as $key => $entry) {
             if ($entry[1] && in_array($entry[1], $operators)) {
                 $result = match ($entry[1]) {
-                    '*' => (float)$entries[$key -1][0] * (float)$entries[$key][0],
-                    '/' => (float)$entries[$key -1][0] / (float)$entries[$key][0],
-                    '-' => (float)$entries[$key -1][0] - (float)$entries[$key][0],
-                    '+' => (float)$entries[$key -1][0] + (float)$entries[$key][0],
+                    '*' => (float)$entries[$key - 1][0] * (float)$entries[$key][0],
+                    '/' => (float)$entries[$key - 1][0] / (float)$entries[$key][0],
+                    '-' => (float)$entries[$key - 1][0] - (float)$entries[$key][0],
+                    '+' => (float)$entries[$key - 1][0] + (float)$entries[$key][0],
                 };
 
-                $entries[$key -1][0] = $result;
+                $entries[$key - 1][0] = $result;
                 unset($entries[$key]);
 
                 return $this->smashRecursively(array_values($entries), $operators);
@@ -67,7 +75,8 @@ class Calculator implements CalculatorInterface
         return $entries;
     }
 
-    private function calculate(string $entry): float {
+    private function calculate(string $entry): float
+    {
         $explodedEntries = $this->explodeOperandsAndOperators($entry);
 
         $primarySmashed = $this->smashRecursively($explodedEntries, self::$primaries);
