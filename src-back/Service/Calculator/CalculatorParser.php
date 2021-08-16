@@ -8,41 +8,32 @@ class CalculatorParser
 {
     public function parse(string $entry): array
     {
-        try {
-            $this->validateString($entry);
-        } catch (ParseError $exception) {
-            throw new CalculatorException('are you kidding ? Please use proper front to avoid syntax errors.', previous: $exception);
-        }
+        $this->validateString($entry) || throw new ParseError('Only characters allowed are / * + - numbers and .');
 
         return $this->explodeOperandsAndOperators($entry);
     }
 
-    private function validateString(string $suspicious): void
+    private function validateString(string $suspicious): bool
     {
-        if (
-            preg_match('/[^0-9+\-*\/.]/', $suspicious)
+        return !(preg_match('/[^0-9+\-*\/.]/', $suspicious)
             || preg_match('/[\-]{3,}/', $suspicious)
             || preg_match('/([.+*\/])\1/', $suspicious)
-        ) {
-            throw new ParseError('Only characters allowed are / * + - numbers and .');
-        }
+        );
     }
 
     private function explodeOperandsAndOperators(string $entry): array
     {
-        $operands = preg_split(Calculator::PREG_LIST, $entry, flags: PREG_SPLIT_OFFSET_CAPTURE);
+        $splitOperations = preg_split(Calculator::PREG_LIST, $entry, flags: PREG_SPLIT_OFFSET_CAPTURE);
 
-        foreach ($operands as &$operand) {
-            $position = $operand[1];
+        foreach ($splitOperations as &$splitOperation) {
+            $position = $splitOperation[1];
 
-            if ($position < 1) {
-                continue;
-            }
+            if ($position < 1) continue;
 
             $operator = $entry[$position - 1];
-            $operand[1] = $operator;
+            $splitOperation[1] = $operator;
         }
 
-        return $operands;
+        return $splitOperations;
     }
 }

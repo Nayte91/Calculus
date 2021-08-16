@@ -3,21 +3,21 @@
 namespace App\Tests\Service;
 
 use PHPUnit\Framework\TestCase;
-use App\Service\Calculator\CalculatorException;
 use App\Service\Calculator\CalculatorParser;
+use ParseError;
 
 class CalculatorParserTest extends TestCase
 {
     /** @dataProvider getThrowingCases */
     public function testThrowing(string $badEntry): void
     {
-        $this->expectException(CalculatorException::class);
+        $this->expectException(ParseError::class);
 
         $parser = new CalculatorParser;
         $parser->parse($badEntry);
     }
 
-    public function getThrowingCases(): array
+    public static function getThrowingCases(): array
     {
         return [
             ["65+z78"],

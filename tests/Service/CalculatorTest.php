@@ -17,6 +17,15 @@ class CalculatorTest extends TestCase
         $this->assertEquals($expected, $calculator->compute($entry));
     }
 
+    /** @dataProvider \App\Tests\Service\CalculatorParserTest::getThrowingCases */
+    public function testThrowing(string $badEntry): void
+    {
+        $this->expectException(CalculatorException::class);
+
+        $calculator = new Calculator(new CalculatorParser);
+        $calculator->compute($badEntry);
+    }
+
     public function getWorkingCases(): array
     {
         return [
