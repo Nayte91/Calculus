@@ -37,6 +37,7 @@ Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman
 * Use of PHP8's named parameters when parameter's position is unknown
 * Use of PHP8's attributes in MainController
 * Use of PHP8's new match expression
+* Use of PHP8's constructor promotion
 * Use of PHPUnit's data providers
 * Coding style PSR-12 compliant
 
@@ -53,12 +54,12 @@ Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman
 * Use of Short-circuit evaluation and ternary operators on TS side
 * Use of async / await, useState hook, map on TS side
 * Use of Functional components instead of classes for improved performances
-* Use of double destructuration, in data/computation.ts
+* Use of double-destructuring, in data/computation.ts
 * Use of useEffect hook
 
-### On the versionning department
+### On the versioning department
 
 * Each change has an issue, a branch, commits, a PR
-* Modified Github's labels in order for better qualification
+* Modified GitHub's labels in order for better qualification
 
 Julien "Nayte" Robic.

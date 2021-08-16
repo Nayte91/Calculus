@@ -1,7 +1,11 @@
 <?php
 
-namespace App\Service\Calculator;
+namespace App\Service;
 
+
+use App\Service\Calculator\CalculatorException;
+use App\Service\Calculator\CalculatorInterface;
+use App\Service\Calculator\CalculatorParser;
 use ParseError;
 
 class Calculator implements CalculatorInterface
@@ -13,7 +17,8 @@ class Calculator implements CalculatorInterface
 
     public function __construct(
         private CalculatorParser $parser,
-    ) { }
+    ) {
+    }
 
     public function compute(string $entry): float
     {
@@ -29,7 +34,6 @@ class Calculator implements CalculatorInterface
         return round($this->calculate($this->parsedEntry), precision: 8);
     }
 
-    /** takes the parsed array, and gives back the same array but smashed once. */
     private function smashRecursively(array $entries, array $operators): array
     {
         foreach ($entries as $key => $entry) {

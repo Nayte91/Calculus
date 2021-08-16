@@ -2,6 +2,7 @@
 
 namespace App\Service\Calculator;
 
+use App\Service\Calculator;
 use ParseError;
 
 class CalculatorParser
@@ -28,7 +29,9 @@ class CalculatorParser
         foreach ($splitOperations as &$splitOperation) {
             $position = $splitOperation[1];
 
-            if ($position < 1) continue;
+            if ($position < 1) {
+                continue;
+            }
 
             $operator = $entry[$position - 1];
             $splitOperation[1] = $operator;

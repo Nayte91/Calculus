@@ -2,7 +2,7 @@
 
 namespace App\Tests\Service;
 
-use App\Service\Calculator\Calculator;
+use App\Service\Calculator;
 use App\Service\Calculator\CalculatorException;
 use App\Service\Calculator\CalculatorParser;
 use PHPUnit\Framework\TestCase;
