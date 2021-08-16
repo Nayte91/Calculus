@@ -20,7 +20,7 @@ class MainController extends AbstractController
     #[Route('/computation', 'computation', methods: ['POST'])]
     public function compute(CalculatorInterface $calculator, Request $request): Response
     {
-        $decodedEntry = json_decode($request->getContent(), true)['entry'] ?? '';
+        $decodedEntry = json_decode($request->getContent(), true)['entry'] ?? '0';
 
         try {
             $result = $calculator->compute($decodedEntry);
@@ -30,7 +30,7 @@ class MainController extends AbstractController
 
         return $this->json([
             'entry' => $decodedEntry,
-            'result' => (string)$result,
+            'result' => $result,
         ]);
     }
 }
