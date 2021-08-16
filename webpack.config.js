@@ -14,7 +14,7 @@ Encore
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
-    .addEntry('app', './front/app.tsx')
+    .addEntry('app', './src-front/app.tsx')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -50,7 +50,7 @@ Encore
     .enableReactPreset()
     .enableIntegrityHashes(Encore.isProduction())
     .copyFiles({
-        from: './front/images',
+        from: './src-front/images',
     })
 ;
 

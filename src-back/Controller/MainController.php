@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Service\CalculatorException;
-use App\Service\CalculatorInterface;
+use App\Service\Calculator\CalculatorException;
+use App\Service\Calculator\CalculatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
