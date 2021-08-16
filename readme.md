@@ -30,11 +30,15 @@ Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman
 
 * Functional tests for controllers, unit test for services
 * Calculator's service has its own exception and interface used for D.I
-* Calc service is powered by eval, and the given string is sanitized by regex check
+* Calc service has proper Interface and Exception
+* Use of regex to sanitize and parse math string
+* Use of recursive function in Calculator private methods
 * Use of short-circuited evaluator, in test
 * Use of PHP8's named parameters when parameter's position is unknown
 * Use of PHP8's attributes in MainController
+* Use of PHP8's new match expression
 * Use of PHPUnit's data providers
+* Coding style PSR-12 compliant
 
 ### On the Front department
 
