@@ -13,8 +13,13 @@ const Calculator: React.FC = () => {
         clearNext && QueueInput();
 
         const prefix: string = clearNext ? '' : calculatorInput;
+        const concatenatedInput: string = `${prefix}${newInput}`;
 
-        setCalculatorInput(`${prefix}${newInput}`);
+        if (
+            !concatenatedInput.match(/[+*.\-\/]{2,}/)
+            && concatenatedInput.split('.').length <= 2
+        ) { setCalculatorInput(concatenatedInput); }
+
         setClearNext(false);
     };
 
