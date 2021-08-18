@@ -23,20 +23,21 @@ WORKDIR /app
 ### Composer dependencies
 COPY ./composer.json ./composer.lock ./
 RUN composer install \
-        --ignore-platform-reqs \
-        --no-interaction \
-        --no-scripts \
-        --prefer-dist
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-scripts \
+    --prefer-dist
 
 FROM php:${PHP_VERSION}-fpm-alpine AS backend_php
 
-### Building PHP extensions
+### Building PHP kit
 RUN apk add --no-cache --update --virtual buildDeps build-base autoconf; apk add libzip-dev \
     && docker-php-ext-configure zip; docker-php-ext-install zip \
     && apk del buildDeps build-base autoconf \
  && mkdir -pm a=rwx /app/var
 
 COPY ./system/backend/php-custom.ini /usr/local/etc/php/php.ini
+COPY --from=backend_composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
