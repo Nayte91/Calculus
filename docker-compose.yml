@@ -1,16 +1,18 @@
 version: "3.5"
 
+x-args: &default_args
+  COMPOSER_VERSION: ${COMPOSER_VERSION}
+  CADDY_VERSION: ${CADDY_VERSION}
+  NODE_VERSION: ${NODE_VERSION}
+  PHP_VERSION: ${PHP_VERSION}
+
 services:
   server:
     build:
       context: .
       dockerfile: system/Dockerfile
       target: server_caddy
-      args: 
-        CADDY_VERSION: ${CADDY_VERSION}
-        NODE_VERSION: ${NODE_VERSION}
-        PHP_VERSION: ${PHP_VERSION}
-        COMPOSER_VERSION: ${COMPOSER_VERSION}
+      args: *default_args
     depends_on:
       - backend
     volumes:
@@ -34,11 +36,7 @@ services:
       context: .
       dockerfile: system/Dockerfile
       target: backend_php
-      args: 
-        CADDY_VERSION: ${CADDY_VERSION}
-        NODE_VERSION: ${NODE_VERSION}
-        PHP_VERSION: ${PHP_VERSION}
-        COMPOSER_VERSION: ${COMPOSER_VERSION}
+      args: *default_args
 ###> Dev
     volumes:
       - ./:/app
