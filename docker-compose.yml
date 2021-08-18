@@ -6,29 +6,51 @@ services:
       context: .
       dockerfile: system/Dockerfile
       target: server_caddy
+      args: 
+        CADDY_VERSION: 2
+        NODE_VERSION: 14
+        PHP_VERSION: 8
+        COMPOSER_VERSION: 2
     depends_on:
       - backend
     volumes:
-      # - ./:/app
+###> Dev
+      - ./:/app
+###< Dev
       - ./system/server/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-    labels:
-      - "traefik.http.routers.calculus.rule=Host(`calculus.anagraph.org`)"
+###> Prod
+#   labels:
+#      - "traefik.http.routers.calculus.rule=Host(`calculus.anagraph.org`)"
+###< Prod
+###> Dev
     ports:
       - "443:443"
+###< Dev
 
   backend:
     build:
       context: .
       dockerfile: system/Dockerfile
       target: backend_php
+      args: 
+        CADDY_VERSION: 2
+        NODE_VERSION: 14
+        PHP_VERSION: 8
+        COMPOSER_VERSION: 2
+###> Dev
+    volumes:
+      - ./:/app
+###< Dev
 
 volumes:
   caddy_data:
   caddy_config:
 
+###> Prod
 #networks:
 #  default:
 #    external: true
 #    name: proxy
+###< Prod

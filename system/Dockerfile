@@ -1,4 +1,10 @@
-FROM node:lts-alpine AS frontend_yarn
+### Dockerfile
+ARG NODE_VERSION
+ARG COMPOSER_VERSION
+ARG PHP_VERSION
+ARG CADDY_VERSION
+
+FROM node:${NODE_VERSION}-alpine AS frontend_yarn
 
 WORKDIR /app
 
@@ -10,7 +16,7 @@ COPY ./src-front/ ./src-front/
 
 RUN yarn build
 
-FROM composer:latest AS backend_composer
+FROM composer:${COMPOSER_VERSION} AS backend_composer
 
 WORKDIR /app
 
@@ -19,11 +25,10 @@ COPY ./composer.json ./composer.lock ./
 RUN composer install \
  --ignore-platform-reqs \
  --no-interaction \
-#  --no-plugins \
  --no-scripts \
  --prefer-dist 
 
-FROM php:8-fpm-alpine AS backend_php
+FROM php:${PHP_VERSION}-fpm-alpine AS backend_php
 
 RUN echo -e 'Building PHP extensions... \n'   \
     && apk add --no-cache --update --virtual buildDeps build-base autoconf; apk add libzip-dev \
@@ -40,11 +45,10 @@ COPY --from=backend_composer /app/vendor/ ./vendor/
 
 COPY . .
 
-FROM caddy:alpine AS server_caddy
+FROM caddy:${CADDY_VERSION}-alpine AS server_caddy
 
 COPY ./system/server/Caddyfile /etc/caddy/Caddyfile
 
 WORKDIR /app
 
 COPY --from=backend_php /app/public/ ./public
-# COPY --from=frontend_yarn /app/public/build/ ./public/build
