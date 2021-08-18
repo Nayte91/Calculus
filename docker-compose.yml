@@ -1,36 +1,54 @@
 version: "3.5"
 
+x-args: &default_args
+  COMPOSER_VERSION: ${COMPOSER_VERSION}
+  CADDY_VERSION: ${CADDY_VERSION}
+  NODE_VERSION: ${NODE_VERSION}
+  PHP_VERSION: ${PHP_VERSION}
+
 services:
   server:
-    image: caddy:alpine
+    build:
+      context: .
+      dockerfile: system/Dockerfile
+      target: server_caddy
+      args: *default_args
     depends_on:
       - backend
     volumes:
+###> Dev
       - ./:/app
+###< Dev
       - ./system/server/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-    labels:
-      - "traefik.http.routers.calculus.rule=Host(`calculus.anagraph.org`)"
+###> Prod
+#   labels:
+#      - "traefik.http.routers.calculus.rule=Host(`calculus.anagraph.org`)"
+###< Prod
+###> Dev
     ports:
       - "443:443"
+###< Dev
 
   backend:
     build:
       context: .
       dockerfile: system/Dockerfile
-      args:
-        PHP_VERSION: 8
-        COMPOSER_VERSION: 2
+      target: backend_php
+      args: *default_args
+###> Dev
     volumes:
-      - .:/app
-      - ./system/backend/php-custom.ini:/usr/local/etc/php/php.ini
+      - ./:/app
+###< Dev
 
 volumes:
   caddy_data:
   caddy_config:
 
+###> Prod
 #networks:
 #  default:
 #    external: true
 #    name: proxy
+###< Prod
