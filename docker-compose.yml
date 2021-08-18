@@ -2,11 +2,14 @@ version: "3.5"
 
 services:
   server:
-    image: caddy:alpine
+    build:
+      context: .
+      dockerfile: system/Dockerfile
+      target: server_caddy
     depends_on:
       - backend
     volumes:
-      - ./:/app
+      # - ./:/app
       - ./system/server/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
@@ -19,12 +22,7 @@ services:
     build:
       context: .
       dockerfile: system/Dockerfile
-      args:
-        PHP_VERSION: 8
-        COMPOSER_VERSION: 2
-    volumes:
-      - .:/app
-      - ./system/backend/php-custom.ini:/usr/local/etc/php/php.ini
+      target: backend_php
 
 volumes:
   caddy_data:
