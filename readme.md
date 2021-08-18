@@ -25,12 +25,19 @@ Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman
 * Symfony's src/ renamed as back/
 * Webpack Encore's assets/ renamed as front/
 * Docker's resources can be found in system/
+* Dockerfile split in stages : yarn, composer, php, caddy
+* Automatically download dependencies for back & front
+* Automatically build front's static files
+* Versions of PHP, caddy, composer, node are set up in .env file and can therefore be overwritten easily
+* Use of .dockerignore file to ensure light & easy deployment
+* Use of YAML anchors in docker-compose to factorize arguments
 
 ### On the Back department
 
 * Functional tests for controllers, unit test for services
 * Calculator's service has its own exception and interface used for D.I
 * Calc service has proper Interface and Exception
+* Coding style PSR-12 compliant
 * Use of regex to sanitize and parse math string
 * Use of recursive function in Calculator private methods
 * Use of short-circuited evaluator, in test
@@ -39,7 +46,6 @@ Reachable on https://127.0.0.1/ and back's API on /computation URI (with Postman
 * Use of PHP8's new match expression
 * Use of PHP8's constructor promotion
 * Use of PHPUnit's data providers
-* Coding style PSR-12 compliant
 
 ### On the Front department
 
