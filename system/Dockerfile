@@ -8,33 +8,33 @@ FROM node:${NODE_VERSION}-alpine AS frontend_yarn
 
 WORKDIR /app
 
+### Yarn dependencies
 COPY ./yarn.lock ./package.json ./webpack.config.js ./tsconfig.json ./
-
 RUN yarn install --frozen-lockfile
 
+### Front static files build
 COPY ./src-front/ ./src-front/
-
 RUN yarn build
 
 FROM composer:${COMPOSER_VERSION} AS backend_composer
 
 WORKDIR /app
 
+### Composer dependencies
 COPY ./composer.json ./composer.lock ./
-
 RUN composer install \
- --ignore-platform-reqs \
- --no-interaction \
- --no-scripts \
- --prefer-dist 
+        --ignore-platform-reqs \
+        --no-interaction \
+        --no-scripts \
+        --prefer-dist
 
 FROM php:${PHP_VERSION}-fpm-alpine AS backend_php
 
-RUN echo -e 'Building PHP extensions... \n'   \
-    && apk add --no-cache --update --virtual buildDeps build-base autoconf; apk add libzip-dev \
+### Building PHP extensions
+RUN apk add --no-cache --update --virtual buildDeps build-base autoconf; apk add libzip-dev \
     && docker-php-ext-configure zip; docker-php-ext-install zip \
     && apk del buildDeps build-base autoconf \
- && echo -e '...PHP Extensions OK \n'
+ && mkdir -pm a=rwx /app/var
 
 COPY ./system/backend/php-custom.ini /usr/local/etc/php/php.ini
 
