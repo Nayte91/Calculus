@@ -8,7 +8,7 @@ button {
   transition: all .07s ease;
 }
 
-.active { transform: scale(1.1) }
+.button--pressed { transform: scale(1.1) }
 
 .button__one { grid-area: one }
 
