@@ -17,18 +17,18 @@ services:
       - backend
     volumes:
 ###> Dev
-      - ./:/app
+#      - ./:/app
 ###< Dev
       - ./system/server/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
 ###> Prod
-#   labels:
-#      - "traefik.http.routers.calculus.rule=Host(`calculus.anagraph.org`)"
+   labels:
+      - "traefik.http.routers.${PROJECT_NAME}.rule=Host(`${PROJECT_NAME}.anagraph.org`)"
 ###< Prod
 ###> Dev
-    ports:
-      - "443:443"
+#    ports:
+#      - "443:443"
 ###< Dev
 
   backend:
@@ -38,8 +38,8 @@ services:
       target: backend_php
       args: *default_args
 ###> Dev
-    volumes:
-      - ./:/app
+#    volumes:
+#      - ./:/app
 ###< Dev
 
 volumes:
