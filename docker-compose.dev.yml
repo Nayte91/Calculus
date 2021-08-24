@@ -19,11 +19,9 @@ services:
       - ./system/server/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-    labels:
-      - "traefik.http.routers.${PROJECT_NAME}.rule=Host(`${PROJECT_NAME}.anagraph.org`)"
-    networks: 
-      - proxy
-      - default
+      - ./:/app
+    ports:
+      - "443:443"
 
   backend:
     build:
@@ -31,12 +29,9 @@ services:
       dockerfile: system/Dockerfile
       target: backend_php
       args: *default_args
+    volumes:
+      - ./:/app
 
 volumes:
   caddy_data:
   caddy_config:
-
-networks:
-  proxy:
-    external:
-      name: reverse_proxy_network
