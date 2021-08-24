@@ -30,6 +30,8 @@ services:
       dockerfile: system/Dockerfile
       target: backend_php
       args: *default_args
+    networks: 
+      - default
 
 volumes:
   caddy_data:
